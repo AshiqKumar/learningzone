@@ -1,0 +1,96 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build C++20 Modules (GCC)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++20",
+                "-fmodules-ts",
+                "-fconcepts",
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "${workspaceFolder}/AdvancedExamples/data_processor.cppm",
+                "${workspaceFolder}/AdvancedExamples/demo_advanced.cpp",
+                "-o",
+                "${workspaceFolder}/advanced_demo"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Build C++20 modules with GCC"
+        },
+        {
+            "label": "Build C++20 Formatting (GCC)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++20",
+                "-fmodules-ts",
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "${workspaceFolder}/AdvancedExamples/formatting_localization.cppm",
+                "${workspaceFolder}/AdvancedExamples/demo_formatting.cpp",
+                "-o",
+                "${workspaceFolder}/formatting_demo"
+            ],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "detail": "Build C++20 formatting example with GCC"
+        },
+        {
+            "label": "Build Traditional Headers",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "${workspaceFolder}/ComparisonExamples/traditional_headers/main_traditional.cpp",
+                "${workspaceFolder}/ComparisonExamples/traditional_headers/calculator.cpp",
+                "-o",
+                "${workspaceFolder}/traditional_demo"
+            ],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "detail": "Build traditional headers example (works with any compiler)"
+        },
+        {
+            "label": "Build C++20 Modules (MSVC)",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "/EHsc",
+                "/std:c++20",
+                "/experimental:module",
+                "${workspaceFolder}/AdvancedExamples/data_processor.cppm",
+                "/c"
+            ],
+            "group": "build",
+            "problemMatcher": ["$msCompile"],
+            "detail": "Build C++20 modules with MSVC (step 1)"
+        },
+        {
+            "label": "Link C++20 Demo (MSVC)",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "/EHsc",
+                "/std:c++20",
+                "data_processor.obj",
+                "${workspaceFolder}/AdvancedExamples/demo_advanced.cpp",
+                "/Fe:advanced_demo.exe"
+            ],
+            "group": "build",
+            "problemMatcher": ["$msCompile"],
+            "detail": "Link C++20 demo with MSVC (step 2)",
+            "dependsOn": "Build C++20 Modules (MSVC)"
+        }
+    ]
+}
